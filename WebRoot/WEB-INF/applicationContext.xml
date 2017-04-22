@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans 	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">	
+	<!-- bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
+		<property name="url" value="jdbc:sqlserver://localhost:1433;DatabaseName=track;"/>
+		<property name="username" value="sa"/>
+		<property name="password" value="sa"/>
+	</bean -->
+	
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+		<property name="url" value="jdbc:mysql://192.168.1.166:3306/track"/>
+		<property name="username" value="root"/>
+		<property name="password" value="test1234"/>
+	</bean>
+	
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref local="dataSource"/>
+		</property>
+		<property name="mappingResources">
+		<list>
+				<value>com/track/entity/Examine.hbm.xml</value>	
+				<value>com/track/entity/Law.hbm.xml</value>	
+				<value>com/track/entity/News.hbm.xml</value>
+				<value>com/track/entity/Orders.hbm.xml</value>
+				<value>com/track/entity/Pick.hbm.xml</value>
+				<value>com/track/entity/Produce.hbm.xml</value>
+				<value>com/track/entity/Sell.hbm.xml</value>	
+				<value>com/track/entity/Track.hbm.xml</value>		
+				<value>com/track/entity/Users.hbm.xml</value>			
+				<value>com/track/entity/Place.hbm.xml</value>			
+				<value>com/track/entity/Notice.hbm.xml</value>				
+				<value>com/track/entity/Checker.hbm.xml</value>			
+				<value>com/track/entity/Standard.hbm.xml</value>									
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<!--  props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+			</props -->
+			
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+			<!--	<prop key="hibernate.hbm2ddl.auto">create</prop>   -->
+			</props>
+			
+			
+		</property>
+	</bean>			
+	
+	<!-- 配置dao -->
+	<bean id="usersDAO" class="com.track.dao.impl.UsersDAO" >
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>	
+	<bean id="placeDAO" class="com.track.dao.impl.PlaceDAO" >
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>	
+	<bean id="produceDAO" class="com.track.dao.impl.ProduceDAO" >
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="pickDAO" class="com.track.dao.impl.PickDAO" >
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>	
+	<bean id="newsDAO" class="com.track.dao.impl.NewsDAO" >
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="lawDAO" class="com.track.dao.impl.LawDAO" >
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>	
+	<bean id="checkerDAO" class="com.track.dao.impl.CheckerDAO" >
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="standardDAO" class="com.track.dao.impl.StandardDAO" >
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="sellDAO" class="com.track.dao.impl.SellDAO" >
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="ordersDAO" class="com.track.dao.impl.OrdersDAO" >
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="trackDAO" class="com.track.dao.impl.TrackDAO" >
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<!-- 配置Biz --> 
+	<bean id="usersBiz" class="com.track.biz.impl.UsersBiz">
+	    <property name="trackDAO" ref="trackDAO"></property>
+	    <property name="usersDAO" ref="usersDAO"></property>
+	    <property name="placeDAO" ref="placeDAO"></property>
+	    <property name="produceDAO" ref="produceDAO"></property>
+	    <property name="pickDAO" ref="pickDAO"></property>
+	    <property name="newsDAO" ref="newsDAO"></property>
+	    <property name="checkerDAO" ref="checkerDAO"></property>
+	    <property name="standardDAO" ref="standardDAO"></property>	    
+	</bean>
+	<bean id="systemBiz" class="com.track.biz.impl.SystemBiz">
+	    <property name="newsDAO" ref="newsDAO"></property>
+	</bean>
+	<bean id="governmentBiz" class="com.track.biz.impl.GovernmentBiz">
+	    <property name="lawDAO" ref="lawDAO"></property>
+	    <property name="newsDAO" ref="newsDAO"></property>
+	     <property name="checkerDAO" ref="checkerDAO"></property>
+	    <property name="standardDAO" ref="standardDAO"></property>
+	</bean>	
+	<bean id="sellBiz" class="com.track.biz.impl.SellBiz">
+	    <property name="ordersDAO" ref="ordersDAO"></property>
+	    <property name="sellDAO" ref="sellDAO"></property>
+	</bean>
+	
+	<!-- 配置 会员中的Action--> 
+	<bean id="usersAction" class="com.track.action.UsersAction" scope="prototype">
+	      <property name="usersBiz" ref="usersBiz"></property>	 
+	       <property name="sellBiz" ref="sellBiz"></property>	      		      	
+	</bean>	
+	<bean id="systemAction" class="com.track.action.SystemAction" scope="prototype">
+	      <property name="systemBiz" ref="systemBiz"></property>	       		      	
+	</bean>
+	<bean id="governmentAction" class="com.track.action.GovernmentAction" scope="prototype">
+	      <property name="governmentBiz" ref="governmentBiz"></property>	       		      	
+	</bean>
+	<bean id="sellAction" class="com.track.action.SellAction" scope="prototype">
+	      <property name="sellBiz" ref="sellBiz"></property>	       		      	
+	</bean>
+	
+</beans>

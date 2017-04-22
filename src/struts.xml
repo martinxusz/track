@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>	
+	<package  name="track"  extends="struts-default">		
+		<action name="login" class="usersAction"  method="login">
+			<result name="success" >admin.jsp</result>	
+			<result name="input" type="redirectAction">index</result>				
+		</action>
+		<action name="deleteOrder" class="sellAction"  method="deleteOrder">
+			<result name="success" type="redirectAction">orderList</result>					
+		</action>
+		<action name="orderList" class="sellAction"  method="orderList">
+			<result name="success" >orderList.jsp</result>					
+		</action>
+		<action name="addOrder" class="sellAction"  method="addOrder">
+			<result name="success" type="redirectAction">orderList</result>					
+		</action>
+		
+		<action name="deleteSell" class="sellAction"  method="deleteSell">
+			<result name="success" type="redirectAction">sellList</result>					
+		</action>
+		<action name="sellList" class="sellAction"  method="sellList">
+			<result name="success" >sellList.jsp</result>					
+		</action>
+		<action name="addSell" class="sellAction"  method="addSell">
+			<result name="success" type="redirectAction">sellList</result>					
+		</action>
+		
+		<action name="deleteChecker" class="governmentAction"  method="deleteChecker">
+			<result name="success" type="redirectAction">checkerList</result>					
+		</action>
+		<action name="checkerList" class="governmentAction"  method="checkerList">
+			<result name="success" >checkerList.jsp</result>					
+		</action>
+		<action name="addChecker" class="governmentAction"  method="addChecker">
+			<result name="success" type="redirectAction">checkerList</result>					
+		</action>
+		
+		<action name="deleteStandard" class="governmentAction"  method="deleteStandard">
+			<result name="success" type="redirectAction">standardList</result>					
+		</action>
+		<action name="standardList" class="governmentAction"  method="standardList">
+			<result name="success" >standardList.jsp</result>					
+		</action>
+		<action name="addStandard" class="governmentAction"  method="addStandard">
+			<result name="success" type="redirectAction">standardList</result>					
+		</action>
+	
+		<action name="getLawByID" class="governmentAction"  method="getLawByID">
+			<result name="success" >law.jsp</result>					
+		</action>
+		<action name="getLawList" class="governmentAction"  method="getLawList">
+			<result name="success" >lawcenter.jsp</result>					
+		</action>
+	
+		<action name="deleteLaw" class="governmentAction"  method="deleteLaw">
+			<result name="success" type="redirectAction" >lawList</result>					
+		</action>
+		<action name="loadLaw" class="governmentAction"  method="loadLaw">
+			<result name="success" >updateLaw.jsp</result>				
+		</action>
+		<action name="updateLaw" class="governmentAction"  method="updateLaw">
+			<result name="success" type="redirectAction" >lawList</result>				
+		</action>
+		<action name="lawList" class="governmentAction"  method="lawList">
+			<result name="success" >lawList.jsp</result>				
+		</action>
+		<action name="addLaw" class="governmentAction"  method="addLaw">
+			<result name="success" type="redirectAction"  >lawList</result>				
+		</action>
+		<action name="getNewsByID" class="systemAction"  method="getNewsByID">
+			<result name="success" >news.jsp</result>					
+		</action>
+		<action name="getNewsList" class="systemAction"  method="getNewsList">
+			<result name="success" >newscenter.jsp</result>					
+		</action>
+	
+		<action name="deleteNews" class="systemAction"  method="deleteNews">
+			<result name="success" type="redirectAction" >newsList</result>					
+		</action>
+		<action name="loadNews" class="systemAction"  method="loadNews">
+			<result name="success" >updateNews.jsp</result>				
+		</action>
+		<action name="updateNews" class="systemAction"  method="updateNews">
+			<result name="success" type="redirectAction" >newsList</result>				
+		</action>
+		<action name="newsList" class="systemAction"  method="newsList">
+			<result name="success" >newsList.jsp</result>				
+		</action>
+		<action name="addNews" class="systemAction"  method="addNews">
+			<result name="success" type="redirectAction"  >newsList</result>				
+		</action>
+		
+		<action name="updateNotice" class="systemAction"  method="updateNotice">
+			<result name="success" >updateNotice.jsp</result>				
+		</action>		
+		<action name="loadNotice" class="systemAction"  method="loadNotice">
+			<result name="success" >updateNotice.jsp</result>				
+		</action>
+		<action name="index" class="systemAction"  method="index">
+			<result name="success" >index.jsp</result>				
+		</action>
+		
+		<action name="selectTrack" class="usersAction"  method="selectTrack">
+			<result name="success" >track.jsp</result>				
+		</action>
+		<action name="getUsersList" class="usersAction"  method="getUsersList">
+			<result name="success" >userscenter.jsp</result>				
+		</action>
+		<action name="getUsersByID" class="usersAction"  method="getUsersByID">
+			<result name="success" >users.jsp</result>				
+		</action>
+		
+		<action name="updateCompany" class="usersAction"  method="updateCompany">
+			<result name="success" >updateCompany.jsp</result>				
+		</action>	
+		<action name="loadProduce" class="usersAction"  method="loadProduce">
+			<result name="success" >addproduce.jsp</result>					
+		</action>	
+		<action name="loadPick" class="usersAction"  method="loadPick">
+			<result name="success" >addpick.jsp</result>				
+		</action>
+		<action name="addPick" class="usersAction"  method="addPick">
+			<result name="success" type="redirectAction" >pickList</result>				
+		</action>
+		<action name="pickList" class="usersAction"  method="pickList">
+			<result name="success" >picklist.jsp</result>				
+		</action>
+		
+		<action name="addProduce" class="usersAction"  method="addProduce">
+			<result name="success" type="redirectAction" >produceList</result>				
+		</action>
+		<action name="produceList" class="usersAction"  method="produceList">
+			<result name="success" >producelist.jsp</result>				
+		</action>
+		
+		<action name="updatePlace" class="usersAction"  method="updatePlace">
+			<result name="success" type="redirectAction" >placeList</result>				
+		</action>		
+		<action name="loadCheck" class="usersAction"  method="loadCheck">
+			<result name="success">check.jsp</result>				
+		</action>
+		<action name="check" class="usersAction"  method="check">
+			<result name="success" type="redirectAction">checkPlace</result>				
+		</action>
+		<action name="loadPlace" class="usersAction"  method="loadPlace">
+			<result name="success">updateplace.jsp</result>				
+		</action>
+		<action name="addPlace" class="usersAction"  method="addPlace">
+			<result name="success" type="redirectAction" >placeList</result>				
+		</action>
+		<action name="placeList" class="usersAction"  method="placeList">
+			<result name="success" >placelist.jsp</result>				
+		</action>
+		<action name="noCheckPlace" class="usersAction"  method="noCheckPlace">
+			<result name="success" >noCheckPlace.jsp</result>				
+		</action>
+		<action name="checkPlace" class="usersAction"  method="checkPlace">
+			<result name="success" >checkPlace.jsp</result>				
+		</action>
+		
+		<action name="usersList" class="usersAction"  method="usersList">
+			<result name="success" >usersList.jsp</result>					
+		</action>
+		<action name="deleteUsers" class="usersAction"  method="deleteUsers">
+			<result name="success"  type="redirectAction">usersList</result>					
+		</action>
+		
+		<action name="regist" class="usersAction"  method="regist">
+			<result name="success" >admin.jsp</result>
+			<result name="input" >regist.jsp</result>					
+		</action>
+		
+		<action name="exit" class="usersAction"  method="exit">
+			<result name="success" type="redirectAction">index</result>				
+		</action>
+		<action name="updatePassword" class="usersAction"  method="updatePassword">
+			<result name="success" >updatepassword.jsp</result>				
+		</action>			
+    </package>    
+</struts>

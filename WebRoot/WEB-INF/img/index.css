@@ -1,0 +1,17 @@
+*{ margin:0; padding:0;}
+body{	
+	text-align:center;
+}
+img{
+border:0px;}
+#main{
+	margin:0px auto;
+	background:url(home.jpg);	
+	width:782px;	
+	height:600px;
+	border:2px #b6b6b6 solid;
+}
+#enter{
+margin-top:470px;
+margin-left:590px;
+}
